@@ -1,12 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import { sendApiResponse } from "../../utils/responseHandler";
 import {
+  bookDetailsByIdUsingAggregate,
   createBooksToDb,
+  getBookDetailsByIdFromDb,
   getFantasyBooksFromDb,
   getRatingBooksFromDb,
   getSciFiByRoliBooks,
-  getUpdateBookPriceFromDb,
   getUpdatePriceFromDb,
+  updateBulkBookPriceFromDb,
+  updatePriceByIdFromDb,
 } from "./books.service";
 
 // Task:1
@@ -51,23 +54,55 @@ export const getRatingBooks = async (
   sendApiResponse(res, 200, true, ratingBooks);
 };
 
-// Task:5, first way to update the price
-export const getUpdatePriceById = async (
+// Task:5, first way to update price using updateMany
+export const updateBulkPrice = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  // const { id } = req.params;
-  const price = await getUpdateBookPriceFromDb();
+  const price = await updateBulkBookPriceFromDb();
   sendApiResponse(res, 200, true, price);
 };
 
-// Task:5 second way to update the price
-export const getUpdateBookPrice = async (
+// Task:5 second way to update price  using aggregate
+export const updateBookPrice = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const ratingBooks = await getUpdatePriceFromDb();
   sendApiResponse(res, 200, true, ratingBooks);
+};
+
+// Task:6, update the price by id
+export const updateBookPriceById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  const price = await updatePriceByIdFromDb(id);
+  sendApiResponse(res, 200, true, price);
+};
+
+// Task:7, get book detail by id using find
+export const getBookDetailsById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  const book = await getBookDetailsByIdFromDb(id);
+  sendApiResponse(res, 200, true, book);
+};
+
+// Task:7, get book detail by id using aggregate
+export const bookDetailsById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  const book = await bookDetailsByIdUsingAggregate(id);
+  sendApiResponse(res, 200, true, book);
 };

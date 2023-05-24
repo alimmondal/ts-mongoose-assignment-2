@@ -1,11 +1,14 @@
 import { Router } from "express";
 import {
+  bookDetailsById,
   createBook,
+  getBookDetailsById,
   getFantasyBooks,
   getRatingBooks,
   getSciFiBooks,
-  getUpdateBookPrice,
-  getUpdatePriceById,
+  updateBookPrice,
+  updateBookPriceById,
+  updateBulkPrice,
 } from "./books.controller";
 
 const router: Router = Router();
@@ -22,10 +25,20 @@ router.get("/sciFi-books", getSciFiBooks);
 // Task:4
 router.get("/rating-books", getRatingBooks);
 
-// Task:5, first way to update price
-router.patch("/update-price", getUpdatePriceById);
+// Task:5, first way to update price using updateMany
+router.patch("/update-price", updateBulkPrice);
 
-// Task:5, second way to update price
-router.get("/update-all-price", getUpdateBookPrice);
+// Task:5, second way to update price  using aggregate
+router.get("/update-all-price", updateBookPrice);
+
+// extra work
+// Task:6, update price by id
+router.patch("/update-id-price/:id", updateBookPriceById);
+
+// Task:7, get details of books by id using find
+router.get("/:id", getBookDetailsById);
+
+// Task:7, get details of books by id using find
+router.get("/book-detail/:id", bookDetailsById);
 
 export default router;

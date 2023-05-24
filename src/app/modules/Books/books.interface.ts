@@ -11,7 +11,7 @@ interface Review {
 
 export interface IBooks extends Document {
   title: string;
-  author: string;
+  author: string[];
   genre: string;
   publicationYear: number;
   rating: number;
@@ -22,11 +22,11 @@ export interface IBooks extends Document {
 
 // export interface IBooks extends Document {
 //   title: string;
-//   author: string;
+//   author: string[];
 //   genre: string;
 //   publicationYear: number;
 //   publisher: string;
-//   reviews: string;
+//   reviews: string[];
 //   rating: number;
 //   price: number;
 // }
