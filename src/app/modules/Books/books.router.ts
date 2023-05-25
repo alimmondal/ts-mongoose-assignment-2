@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   bookDetailsById,
   createBook,
+  getAllBooks,
   getBookDetailsById,
   getFantasyBooks,
   getRatingBooks,
@@ -12,6 +13,9 @@ import {
 } from "./books.controller";
 
 const router: Router = Router();
+
+// Task:8, get all books using find or aggregate
+router.get("/all-books", getAllBooks);
 
 // Task:1
 router.post("/create-book", createBook);

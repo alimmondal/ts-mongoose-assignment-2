@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { IBooks } from "./books.interface";
 
 const bookSchema = new Schema<IBooks>({
@@ -52,4 +52,4 @@ const bookSchema = new Schema<IBooks>({
   ],
 });
 
-export const Books = mongoose.model<IBooks>("Books", bookSchema);
+export const Books = model<IBooks>("Books", bookSchema);

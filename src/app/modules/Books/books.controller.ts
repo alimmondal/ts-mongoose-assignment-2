@@ -3,6 +3,7 @@ import { sendApiResponse } from "../../utils/responseHandler";
 import {
   bookDetailsByIdUsingAggregate,
   createBooksToDb,
+  getAllBooksFromDb,
   getBookDetailsByIdFromDb,
   getFantasyBooksFromDb,
   getRatingBooksFromDb,
@@ -104,5 +105,15 @@ export const bookDetailsById = async (
 ) => {
   const { id } = req.params;
   const book = await bookDetailsByIdUsingAggregate(id);
+  sendApiResponse(res, 200, true, book);
+};
+
+// Task:7, get all books by using aggregate
+export const getAllBooks = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const book = await getAllBooksFromDb();
   sendApiResponse(res, 200, true, book);
 };

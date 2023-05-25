@@ -107,3 +107,10 @@ export const bookDetailsByIdUsingAggregate = async (
   ]);
   return book;
 };
+
+// Task: 8, get all books using aggregation
+export const getAllBooksFromDb = async (): Promise<IBooks[]> => {
+  // const book = await Books.find();
+  const book = await Books.aggregate([{ $match: {} }]);
+  return book;
+};
